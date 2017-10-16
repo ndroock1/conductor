@@ -17,9 +17,10 @@ import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+//import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
@@ -111,6 +112,14 @@ public class Locomotive implements Conductor<Locomotive> {
         switch (configuration.browser()) {
             case CHROME:
                 capabilities = DesiredCapabilities.chrome();
+
+//NiLOSTEP
+//begin
+                // Add option Headless to Chrome
+                ChromeOptions options = new ChromeOptions();
+                options.setHeadless(true);
+                capabilities.merge(options);
+//end
                 if (isLocal) try {
                     driver = new ChromeDriver(capabilities);
                 } catch (Exception x) {
@@ -158,16 +167,17 @@ public class Locomotive implements Conductor<Locomotive> {
                     System.exit(1);
                 }
                 break;
-            case PHANTOMJS:
-                capabilities = DesiredCapabilities.phantomjs();
-                if (isLocal) try {
-                    driver = new PhantomJSDriver(capabilities);
-                } catch (Exception x) {
-                    x.printStackTrace();
-                    logFatal("Also see https://github.com/conductor-framework/conductor/wiki/WebDriver-Executables");
-                    System.exit(1);
-                }
-                break;
+// PhantomJS no longer supported
+//            case PHANTOMJS:
+//                capabilities = DesiredCapabilities.phantomjs();
+//                if (isLocal) try {
+//                    driver = new PhantomJSDriver(capabilities);
+//                } catch (Exception x) {
+//                    x.printStackTrace();
+//                    logFatal("Also see https://github.com/conductor-framework/conductor/wiki/WebDriver-Executables");
+//                    System.exit(1);
+//                }
+//                break;
             default:
                 System.err.println("Unknown browser: " + configuration.browser());
                 return;
@@ -206,7 +216,11 @@ public class Locomotive implements Conductor<Locomotive> {
     }
 
     static public String findFile(String filename) {
-        String paths[] = {"", "bin/", "target/classes"}; // if you have chromedriver somewhere else on the path, then put it here.
+        String paths[] = {"C:\\Users\\nilo\\__DATA\\Mega\\DATA\\MyJavaProjects\\bota-dcp\\target\\classes\\drivers\\",
+                "", "bin/", "target/classes", "target/classes/drivers/"}; // if you have chromedriver somewhere else on the path, then put it here.
+
+//        String paths[] = {"", "bin/", "target/classes"}; // if you have chromedriver somewhere else on the path, then put it here.
+
         for (String path : paths) {
             if (new File(path + filename).exists())
                 return path + filename;

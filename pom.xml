@@ -110,8 +110,11 @@
   </scm>
 
   <properties>
-    <selenium_version>3.4.0</selenium_version>
-    <phantomjs_version>1.2.1</phantomjs_version>
+    <maven.test.skip>true</maven.test.skip>
+    <!--<selenium_version>3.4.0</selenium_version>-->
+    <selenium_version>3.6.0</selenium_version>
+    <!--<selenium_version>2.52.0</selenium_version>-->
+    <phantomjs_version>1.4.0</phantomjs_version>
     <!--<CONDUCTOR_URL>${env.CONDUCTOR_URL}</CONDUCTOR_URL>-->
     <!--<CONDUCTOR_BROWSER>${env.CONDUCTOR_BROWSER}</CONDUCTOR_BROWSER>-->
     <!--<CONDUCTOR_HUB>${env.CONDUCTOR_HUB}</CONDUCTOR_HUB>-->
